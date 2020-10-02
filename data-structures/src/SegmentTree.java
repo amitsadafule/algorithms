@@ -1,6 +1,11 @@
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
+/**
+ * range search time complexity : O(log n)
+ * tree construction time complexity is O(n)
+ * Space complexity : O(2*2(log n) - 1) ~= O(2^n)
+ */
 public class SegmentTree {
 
   private int[] treeArray;
