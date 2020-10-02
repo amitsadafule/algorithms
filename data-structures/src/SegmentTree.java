@@ -4,7 +4,7 @@ import java.util.function.BiFunction;
 /**
  * range search time complexity : O(log n)
  * tree construction time complexity is O(n)
- * Space complexity : O(2*2(log n) - 1) ~= O(2^n)
+ * Space complexity : O(n)
  */
 public class SegmentTree {
 
