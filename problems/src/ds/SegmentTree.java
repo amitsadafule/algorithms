@@ -1,3 +1,5 @@
+package ds;
+
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
@@ -76,7 +78,7 @@ public class SegmentTree {
 
   @Override
   public String toString() {
-    return "SegmentTree" + Arrays.toString(treeArray);
+    return "ds.SegmentTree" + Arrays.toString(treeArray);
   }
 
   public static void main(String[] args) {
