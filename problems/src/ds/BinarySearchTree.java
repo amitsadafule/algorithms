@@ -1,5 +1,10 @@
 package ds;
 
+/**
+ * insert element time complexity : O(log n)
+ * creation time complexity : O(n log n)
+ * Space complexity : O(n)
+ */
 public class BinarySearchTree {
 
   private Node<Integer> root;
@@ -14,6 +19,10 @@ public class BinarySearchTree {
 
   public void preorderTraversal() {
     preorderTraversal(root);
+  }
+
+  public Node<Integer> getRoot() {
+    return this.root;
   }
 
   private void buildTree(int[] array) {
