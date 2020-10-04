@@ -8,7 +8,7 @@ import java.util.Queue;
 import java.util.TreeMap;
 
 /**
- * Time Complexity : Construction of scan for finding level and keeping sorted map O(n log n) + printing O(n) = O(n log n)
+ * Time Complexity : Scan for finding level and keeping sorted map O(n log n) + printing O(n) = O(n log n)
  * Space complexity : O(n)
  */
 public class TopViewOfTree {
