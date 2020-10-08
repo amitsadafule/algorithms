@@ -3,45 +3,43 @@ package problems;
 /**
  * https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/?ref=rp
  * n = total items
- * Time Complexity : O(n*n)
- * Space complexity : O( n(n+1)/2 ) = O(n)
+ * W = capacity
+ * Time Complexity : O(n*W)
+ * Space complexity : O(n*W)
  *
  */
 
-class Info {
-  int totalVal;
-  int totalWt;
-  Info(int totalVal, int totalWt) {
-    this.totalVal = totalVal;
-    this.totalWt = totalWt;
-  }
-}
 public class Knapsack01 {
 
-  private static int findMaxValue(int[] val, int[] wt, int capacity) {
-    Info[][] matrix = new Info[wt.length][wt.length];
-
-    matrix[0][0] = new Info(val[0], wt[0]);
-    for(int counter = 1; counter < wt.length; counter++) {
-      for(int combinationCounter = 0; combinationCounter < counter; combinationCounter++) {
-        Info previous = matrix[combinationCounter][counter - 1];
-        if(previous.totalWt + wt[counter] > capacity) {
-          matrix[combinationCounter][counter] = previous;
-        } else {
-          matrix[combinationCounter][counter] = new Info(previous.totalVal + val[counter], previous.totalWt + wt[counter]);
-        }
-      }
-      matrix[counter][counter] = new Info(val[counter], wt[counter]);;
-    }
-
-    int max = -1;
-    for(int counter = 0; counter < wt.length; counter++) {
-      if(matrix[counter][wt.length - 1].totalVal > max) {
-        max = matrix[counter][wt.length - 1].totalVal;
+  private static int solveKnapsack(int[] val, int[] wt, int capacity) {
+    int[][] memory = new int[val.length + 1][capacity + 1];
+    for(int row = 0; row < val.length + 1; row++) {
+      for(int column = 0; column < capacity + 1; column++) {
+        memory[row][column] = -1;
       }
     }
 
-    return max;
+    return findMaxValue(val, wt, capacity, val.length, memory);
+  }
+
+  private static int findMaxValue(int[] val, int[] wt, int capacity, int pos, int[][] memory) {
+
+    //System.out.println(capacity + ":" + pos);
+    if(pos == 0 || capacity == 0)  return 0;
+    if(memory[pos][capacity] != -1) return memory[pos][capacity];
+
+    if(wt[pos - 1] > capacity) {
+      memory[pos][capacity] = findMaxValue(val, wt, capacity, pos - 1, memory);
+      return memory[pos][capacity];
+    }
+
+    int out = Math.max((val[pos - 1] +
+      findMaxValue(val, wt, capacity - wt[pos - 1], pos - 1, memory)), //considering wt[pos - 1]
+      findMaxValue(val, wt, capacity, pos - 1, memory)); //not considering wt[pos - 1]
+    //System.out.println(capacity + ":" + pos + ":"  +out);
+    //System.out.println("================");
+    memory[pos][capacity] = out;
+    return out;
   }
 
   public static void main(String[] args) {
@@ -54,7 +52,12 @@ public class Knapsack01 {
     int[] wt = new int[]{1,2,3,8,7,4};
     int W = 10;
     //expected answer = 60
-    System.out.println(findMaxValue(val, wt, W));
+
+    /*int[] val = new int[]{60, 100, 120, 50};
+    int[] wt = new int[]{10, 20, 30, 40};
+    int W = 40;*/
+    //expected answer = 60
+    System.out.println(solveKnapsack(val, wt, W));
 
 
   }
