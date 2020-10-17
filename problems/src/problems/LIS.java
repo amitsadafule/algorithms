@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * https://www.geeksforgeeks.org/construction-of-longest-increasing-subsequence-using-dynamic-programming/
  * Time Complexity : O(n*n)
- * Space complexity : O(n*n)
+ * Space complexity : O(n*n) for printing lis and O(1) for giving length of lis
  * ****IMPORTANT Does not work with duplicate values
  */
 public class LIS {
